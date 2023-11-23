@@ -1,0 +1,91 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css" />
+<link rel="stylesheet" href="/stylesheets/showWatchlist.css" />
+
+<div class="container show">
+    <div class="card">
+        <div class="d-flex justify-content-between">
+            <h4 class="card-title"><%=watchlist.title %> (<%=watchlist.year %>)</h4>
+            <div class="editdelete ms-auto">
+                <% if(currentUser &&watchlist.author.equals(currentUser._id)) { %>
+                <a class="btn btn-secondary" href="/watchlists/<%=watchlist._id %>/edit"> Edit </a>
+                <form class="d-inline" action="/watchlists/<%=watchlist._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="watchlistCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <% watchlist.images.forEach((img, i)=> { %>
+                        <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                            <img src="<%=img.url%>" class="d-block w-100" alt="" />
+                        </div>
+                        <% }) %>
+                    </div>
+
+                    <% if(watchlist.images.length> 1) { %>
+                    <button
+                        class="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#watchlistCarousel"
+                        data-bs-slide="prev"
+                    >
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                        class="carousel-control-next"
+                        type="button"
+                        data-bs-target="#watchlistCarousel"
+                        data-bs-slide="next"
+                    >
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <button type="button" class="btn statusbutton mb-3"><%=watchlist.status %></button>
+
+                <ul class="list-group">
+                    <li class="list-group-item d-flex align-items-center">
+                        <span class="ratingtext"><span>Rating</span></span>
+                        <span class="starability-result rating" data-rating="<%=watchlist.rating%>"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="name">Country</span><span><%=watchlist.country%></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="name"><span>Genre</span></span
+                        ><span><%=watchlist.genre %></span>
+                    </li>
+                </ul>
+
+                <% if (watchlist.preference.length >= 1) { %>
+                <hr />
+                <p>Aspects you appreciate most</p>
+                <div>
+                    <% for (let preference of watchlist.preference) { %>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" style="pointer-events: none;">
+                            <button type="button" class="btn btn-outline-primary mb-3 preference"><%=preference %></button>
+                        </div>
+                    <% } %>
+                </div>
+                <% } %>
+        
+                <% if (watchlist.notes.length >= 1) { %>
+                    <hr />
+                    <h5>Notes</h5>
+                    <div><%=watchlist.notes %></div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

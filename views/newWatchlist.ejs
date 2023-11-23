@@ -1,0 +1,257 @@
+<% layout('layouts/boilerplate') %>
+
+<link rel="stylesheet" href="/stylesheets/newWatchlist.css" />
+<link rel="stylesheet" href="/stylesheets/stars.css" />
+
+<div class="row">
+    <h2 class="text-center">New Watchlist</h2>
+    <div class="col-md-6 offset-md-3">
+        <form action="/watchlists" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="watchlist[title]" required />
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <div class="container mb-3">
+                <div class="row">
+                    <div class="col-md-4 country me-auto">
+                        <div><label class="form-label" for="country">Country</label></div>
+                        <select class="form-select" id="country" name="watchlist[country]" required>
+                            <option style="display: none" value="">Country</option>
+                            <option value="China">China</option>
+                            <option value="France">France</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Hongkong">Hongkong</option>
+                            <option value="India">India</option>
+                            <option value="Indonesia">Indonesia</option>
+                            <option value="Japan">Japan</option>
+                            <option value="South Korea">South Korea</option>
+                            <option value="Spain">Spain</option>
+                            <option value="Taiwan">Taiwan</option>
+                            <option value="Thailand">Thailand</option>
+                            <option value="UK">UK</option>
+                            <option value="USA">USA</option>
+                        </select>
+                        <div class="valid-feedback">Looks Good!</div>
+                    </div>
+                    <div class="col-md-4 year">
+                        <div>
+                            <label class="form-label" for="year">Year</label>
+                        </div>
+                        <select class="form-select" id="year" name="watchlist[year]" required>
+                            <option style="display: none" value="">Year</option>
+                            <% for (let i=2023; i>= 1980; i--) { %>
+                            <option value=" <%=i %>"><%= i %></option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 genre ms-auto">
+                        <div>
+                            <label class="form-label" for="genre">Genre</label>
+                        </div>
+                        <select class="form-select" id="genre" name="watchlist[genre]" required>
+                            <option style="display: none" value="">Genre</option>
+                            <option value="Action">Action</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Animation">Animation</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Sci-Fi">Sci-Fi</option>
+                            <option value="Thriller">Thriller</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mb-3">
+                <div class="row">
+                    <div class="col-md-4 status me-auto">
+                        <div>
+                            <label class="form-label" for="status">Status</label>
+                        </div>
+                        <select class="form-select" id="status" name="watchlist[status]" required>
+                            <option style="display: none" value="">Status</option>
+                            <option value="Plan to Watch">Plan to Watch</option>
+                            <option value="Currently Watching">Currently Watching</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Dropped">Dropped</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8 ratingpreference">
+                        <div class="rating" style="display: none">
+                            <div class="row">
+                                <label class="form-label" for="rating">Overall Rating</label>
+                                <div class="col-md-8 rating">
+                                    <fieldset class="starability-basic">
+                                        <input
+                                            type="radio"
+                                            id="no-rate"
+                                            class="input-no-rate"
+                                            name="watchlist[rating]"
+                                            value="0"
+                                            checked
+                                            aria-label="No rating."
+                                        />
+                                        <input type="radio" id="first-rate1" name="watchlist[rating]" value="1" />
+                                        <label for="first-rate1" title="Terrible">1 star</label>
+                                        <input type="radio" id="first-rate2" name="watchlist[rating]" value="2" />
+                                        <label for="first-rate2" title="Not good">2 stars</label>
+                                        <input type="radio" id="first-rate3" name="watchlist[rating]" value="3" />
+                                        <label for="first-rate3" title="Average">3 stars</label>
+                                        <input type="radio" id="first-rate4" name="watchlist[rating]" value="4" />
+                                        <label for="first-rate4" title="Very good">4 stars</label>
+                                        <input type="radio" id="first-rate5" name="watchlist[rating]" value="5" />
+                                        <label for="first-rate5" title="Amazing">5 stars</label>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-4 selectedRating">
+                                    <span id="selectedRating"></span>
+                                </div>
+                            </div>
+
+                            <div class="preference" style="display: none">
+                                <span class="ptext">What do you like most about it?</span>
+                                <span class="optional">Multiple selection (optional)</span>
+                                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                    <input
+                                        type="checkbox"
+                                        class="btn-check"
+                                        id="production"
+                                        name="watchlist[preference]"
+                                        value="Production"
+                                    />
+                                    <label class="btn btn-outline-primary" for="production">Production</label>
+                                    <input
+                                        type="checkbox"
+                                        class="btn-check"
+                                        id="story"
+                                        name="watchlist[preference]"
+                                        value="Story"
+                                    />
+                                    <label class="btn btn-outline-primary" for="story">Story</label>
+                                    <input
+                                        type="checkbox"
+                                        class="btn-check"
+                                        id="acting"
+                                        name="watchlist[preference]"
+                                        value="Acting"
+                                    />
+                                    <label class="btn btn-outline-primary" for="acting">Acting</label>
+                                    <input
+                                        type="checkbox"
+                                        class="btn-check"
+                                        id="visualfx"
+                                        name="watchlist[preference]"
+                                        value="Visual FX"
+                                    />
+                                    <label class="btn btn-outline-primary" for="visualfx">Visual FX</label>
+                                    <input
+                                        type="checkbox"
+                                        class="btn-check"
+                                        id="ost"
+                                        name="watchlist[preference]"
+                                        value="OST"
+                                    />
+                                    <label class="btn btn-outline-primary" for="ost">OST</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Movie Poster</label>
+                <input class="form-control" type="file" id="image" name="image" multiple required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="notes">Notes</label>
+                <span class="optional">(optional)</span>
+                <textarea
+                    class="form-control"
+                    type="text"
+                    id="notes"
+                    name="watchlist[notes]"
+                    placeholder="Could be review, trivia, or pretty much anything about the movie"
+                ></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    const checkboxes = document.querySelectorAll(".btn-check");
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+            const selectedValues = Array.from(checkboxes)
+                .filter((cb) => cb.checked)
+                .map((cb) => cb.value);
+
+            document.value = selectedValues.join(",");
+        });
+    });
+
+    $(document).ready(function () {
+        toggleSections();
+
+        $("#status").change(function () {
+            toggleSections();
+        });
+
+        // Listen for changes in the rating
+        $("input[name='watchlist[rating]']").change(function () {
+            toggleSections();
+        });
+
+        // function for toggle visibility
+        function toggleSections() {
+            var selectedStatus = $("#status").val();
+            var selectedRating = $("input[name='watchlist[rating]']:checked").val();
+
+            // selectedRating visibility
+            $("#selectedRating").css("opacity", "0.3");
+            $("#selectedRating").html(selectedRating === "0" ? "" : "<strong>" + selectedRating + "</strong>" + "/5");
+            $(".rating").toggle(selectedRating !== "0");
+
+            // toggle rating
+            if (
+                selectedStatus === "Completed" ||
+                selectedStatus === "Dropped" ||
+                selectedStatus === "Currently Watching"
+            ) {
+                $(".rating").show();
+            } else {
+                $(".rating").hide();
+                $("input[name='watchlist[rating]'][value='0']").prop("checked", true);
+            }
+
+            // toggle preference
+            if (
+                selectedRating === "1" ||
+                selectedRating === "2" ||
+                selectedRating === "3" ||
+                selectedRating === "4" ||
+                selectedRating === "5"
+            ) {
+                $(".preference").show();
+            } else {
+                $(".preference").hide();
+                $("input[name='watchlist[preference]']").prop("checked", false);
+            }
+        }
+    });
+</script>

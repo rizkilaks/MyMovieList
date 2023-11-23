@@ -1,0 +1,46 @@
+.show {
+    padding: 0px 200px 0px 200px;
+    justify-content: center;
+    width: 1200px;
+}
+
+.name {
+    display: inline-block;
+    width: 75px;
+}
+
+.ratingtext {
+    width: 53px;
+}
+
+.statusbutton {
+    pointer-events: none;
+    background-color: #d5f0f9;
+    border-radius: 0;
+}
+
+.editdelete {
+    display: inline-block;
+}
+
+.card {
+    padding: 0.35rem 0.5rem;
+    border-radius: 0;
+}
+
+.card-title {
+    padding-left: 0.5rem;
+    color: #001b62;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.rating {
+    scale: 0.7;
+}
+
+.preference {
+    background-color: #0d6efd;
+    color: white;
+    font-size: 14px;
+}

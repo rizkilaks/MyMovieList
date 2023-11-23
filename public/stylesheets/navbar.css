@@ -1,0 +1,15 @@
+.navbar {
+    background-color: #d5f0f9;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-family: lato, Helvetica, Arial, sans-serif;
+}
+
+.navbar a {
+    color: #001b62;
+}
+
+.container-fluid {
+    padding: 0rem 20rem 0rem 20rem;
+}

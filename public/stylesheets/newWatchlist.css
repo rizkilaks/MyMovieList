@@ -1,0 +1,44 @@
+.dropdown-toggle {
+    min-width: 8vw;
+}
+
+.preference {
+    margin-left: 25px;
+}
+
+.ptext {
+    margin-left: -25px;
+    font-size: 16px;
+}
+
+.optional {
+    opacity: 0.3;
+    font-size: 14px;
+}
+
+.btn-group.preference {
+    margin-top: 10px;
+}
+
+.col-md-4.status,
+.col-md-4.year,
+.col-md-4.genre,
+.col-md-4.country {
+    padding: 0;
+    width: 10vw;
+}
+
+#selectedRating {
+    position: relative;
+    line-height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.col-md-8.rating {
+    width: 165px;
+}
+
+.btn.btn-outline-primary {
+    font-size: 14px;
+}
