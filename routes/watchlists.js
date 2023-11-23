@@ -18,7 +18,7 @@ router.get("/new", isLoggedIn, watchlists.renderNewForm);
 
 router
     .route("/:id")
-    .get(catchAsync(watchlists.showWatchlist))
+    .get(isLoggedIn, catchAsync(watchlists.showWatchlist))
     .put(isLoggedIn, isAuthor, upload.array("image"), validateWatchlist, catchAsync(watchlists.updateWatchlist))
     .delete(isLoggedIn, isAuthor, catchAsync(watchlists.deleteWatchlist));
 
