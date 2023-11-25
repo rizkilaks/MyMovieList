@@ -17,12 +17,11 @@ const User = require("./models/user");
 const userRoutes = require("./routes/users");
 const watchlist = require("./models/watchlist");
 const mongoSanitize = require("express-mongo-sanitize");
-
 const MongoDBStore = require("connect-mongo");
 
-//const dbUrl = process.env.DB_URL
+const dbUrl = process.env.DB_URL;
 
-const dbUrl = "mongodb://127.0.0.1:27017/mymovielist";
+// const dbUrl = "mongodb://127.0.0.1:27017/mymovielist";
 
 mongoose
     .connect(dbUrl)
