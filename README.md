@@ -12,6 +12,8 @@ Basic CRUD application built with the following technologies:
 -   ExpressJS
 -   JQuery
 -   NodeJS
+-   Bootstrap
+-   Cloudinary
 
 ## Preview
 
