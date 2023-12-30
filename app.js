@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
+  require("dotenv").config();
 }
 
 const express = require("express");
@@ -24,19 +24,19 @@ const dbUrl = process.env.DB_URL;
 // const dbUrl = "mongodb://127.0.0.1:27017/mymovielist";
 
 mongoose
-    .connect(dbUrl)
-    .then(() => {
-        console.log("Connection Open!");
-    })
-    .catch((err) => {
-        console.log("Error");
-        console.log(err);
-    });
+  .connect(dbUrl)
+  .then(() => {
+    console.log("Connection Open!");
+  })
+  .catch((err) => {
+    console.log("Error");
+    console.log(err);
+  });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
-    console.log("Database connected");
+  console.log("Database connected");
 });
 
 const app = express();
@@ -51,26 +51,26 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 const store = MongoDBStore.create({
-    mongoUrl: dbUrl,
-    secret: "thisshouldbeabettersecret",
-    touchAfter: 24 * 60 * 60,
+  mongoUrl: dbUrl,
+  secret: "thisshouldbeabettersecret",
+  touchAfter: 24 * 60 * 60,
 });
 
 store.on("error", function (e) {
-    console.log("Session store error", e);
+  console.log("Session store error", e);
 });
 
 const sessionConfig = {
-    store,
-    name: "session",
-    secret: "thisshouldbeabettersecret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
-    },
+  store,
+  name: "session",
+  secret: "thisshouldbeabettersecret",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
 };
 
 app.use(session(sessionConfig));
@@ -84,10 +84,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    next();
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
 });
 
 app.use("/watchlists", watchlistRoutes);
@@ -95,22 +95,22 @@ app.use("/watchlists", watchlistRoutes);
 app.use("/", userRoutes);
 
 app.get("/", (req, res) => {
-    res.render("home");
+  res.render("home");
 });
 
 // when routes to unknown address, e.g. watchlists/id/reviewId/method="_Delete", it will return to homepage.
 app.all("*", async (req, res, next) => {
-    const watchlists = await watchlist.find();
-    res.render("indexwatchlist", { watchlists });
-    //res.send('404 Not Found')
+  const watchlists = await watchlist.find();
+  res.render("indexwatchlist", { watchlists });
+  //res.send('404 Not Found')
 });
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500, message = "Something went wrong" } = err;
-    if (!err.message) err.message = "Oh no, Something went wrong";
-    res.status(statusCode).render("error", { err });
+  const { statusCode = 500, message = "Something went wrong" } = err;
+  if (!err.message) err.message = "Oh no, Something went wrong";
+  res.status(statusCode).render("error", { err });
 });
 
 app.listen(3000, () => {
-    console.log("Connecting to Port 3000");
+  console.log("Connecting to Port 3000");
 });
