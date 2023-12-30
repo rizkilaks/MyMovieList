@@ -6,142 +6,148 @@
 = 1; %> <% if(currentUser) { %>
 <h3>Welcome to <span class="username"><%=currentUser.username%></span>'s Movie List</h3>
 
-<% if (watchlists.some(watchlist => watchlist.status === "Currently Watching")) { %>
+<% if (watchlists.some(watchlist => watchlist.status === "Currently Watching" &&
+watchlist.author.equals(currentUser._id))) { %>
 <div class="card" mb-3>
-    <h5>Currently Watching</h5>
+  <h5>Currently Watching</h5>
 </div>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Year</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Country</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Notes</th>
-        </tr>
-    </thead>
-    <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Currently Watching") { %>
-    <tbody>
-        <tr>
-            <td class="index"><%= currentlyWatchingIndex %></td>
-            <td class="title">
-                <a class="bold-link" href="/watchlists/<%= watchlist._id %>"><%= watchlist.title %></a>
-            </td>
-            <td class="year"><%= watchlist.year %></td>
-            <td class="genre"><%= watchlist.genre %></td>
-            <td class="country"><%= watchlist.country %></td>
-            <td class="starability-result" data-rating="<%=watchlist.rating %>"></td>
-            <td><%= watchlist.notes %></td>
-        </tr>
-    </tbody>
-    <% currentlyWatchingIndex++; %> <% } %> <% }); %>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Country</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Currently Watching" &&
+  watchlist.author.equals(currentUser._id)) { %>
+  <tbody>
+    <tr>
+      <td class="index"><%= currentlyWatchingIndex %></td>
+      <td class="title">
+        <a class="bold-link" href="/watchlists/<%= watchlist._id %>"><%= watchlist.title %></a>
+      </td>
+      <td class="year"><%= watchlist.year %></td>
+      <td class="genre"><%= watchlist.genre %></td>
+      <td class="country"><%= watchlist.country %></td>
+      <td class="starability-result" data-rating="<%=watchlist.rating %>"></td>
+      <td><%= watchlist.notes %></td>
+    </tr>
+  </tbody>
+  <% currentlyWatchingIndex++; %> <% } %> <% }); %>
 </table>
 
-<% if (watchlists.some(watchlist => watchlist.status === "Plan to Watch")) { %>
+<% if (watchlists.some(watchlist => watchlist.status === "Plan to Watch" && watchlist.author.equals(currentUser._id))) {
+%>
 <div class="card" mb-3>
-    <h5>Plan to Watch</h5>
+  <h5>Plan to Watch</h5>
 </div>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Year</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Country</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Notes</th>
-        </tr>
-    </thead>
-    <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Plan to Watch") { %>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Country</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Plan to Watch" &&
+  watchlist.author.equals(currentUser._id)) { %>
 
-    <tbody>
-        <tr>
-            <td class="index"><%= planToWatchIndex%></td>
-            <td class="title">
-                <a class="bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
-            </td>
-            <td class="year"><%= watchlist.year %></td>
-            <td class="genre"><%= watchlist.genre %></td>
-            <td class="country"><%= watchlist.country %></td>
-            <td class="starability-result"></td>
-            <td><%= watchlist.notes %></td>
-        </tr>
-    </tbody>
-    <% planToWatchIndex++; %> <% } %> <% }) %>
+  <tbody>
+    <tr>
+      <td class="index"><%= planToWatchIndex%></td>
+      <td class="title">
+        <a class="bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
+      </td>
+      <td class="year"><%= watchlist.year %></td>
+      <td class="genre"><%= watchlist.genre %></td>
+      <td class="country"><%= watchlist.country %></td>
+      <td class="starability-result"></td>
+      <td><%= watchlist.notes %></td>
+    </tr>
+  </tbody>
+  <% planToWatchIndex++; %> <% } %> <% }) %>
 </table>
 
-<% if (watchlists.some(watchlist => watchlist.status === "Completed")) { %>
+<% if (watchlists.some(watchlist => watchlist.status === "Completed" && watchlist.author.equals(currentUser._id))) { %>
 <div class="card" mb-3>
-    <h5>Completed</h5>
+  <h5>Completed</h5>
 </div>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Year</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Country</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Notes</th>
-        </tr>
-    </thead>
-    <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Completed") { %>
-    <tbody>
-        <tr>
-            <td class="index"><%= completedIndex %></td>
-            <td class="title">
-                <a class="bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
-            </td>
-            <td class="year"><%= watchlist.year %></td>
-            <td class="genre"><%= watchlist.genre %></td>
-            <td class="country"><%= watchlist.country %></td>
-            <td class="starability-result" data-rating="<%=watchlist.rating%>"></td>
-            <td><%= watchlist.notes %></td>
-        </tr>
-    </tbody>
-    <% completedIndex++; %> <% } %> <% }) %>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Country</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Completed" &&
+  watchlist.author.equals(currentUser._id)) { %>
+  <tbody>
+    <tr>
+      <td class="index"><%= completedIndex %></td>
+      <td class="title">
+        <a class="bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
+      </td>
+      <td class="year"><%= watchlist.year %></td>
+      <td class="genre"><%= watchlist.genre %></td>
+      <td class="country"><%= watchlist.country %></td>
+      <td class="starability-result" data-rating="<%=watchlist.rating%>"></td>
+      <td><%= watchlist.notes %></td>
+    </tr>
+  </tbody>
+  <% completedIndex++; %> <% } %> <% }) %>
 </table>
 
-<% if (watchlists.some(watchlist => watchlist.status === "Dropped")) { %>
+<% if (watchlists.some(watchlist => watchlist.status === "Dropped" && watchlist.author.equals(currentUser._id))) { %>
 <div class="card" mb-3>
-    <h5>Dropped</h5>
+  <h5>Dropped</h5>
 </div>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Year</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Country</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Notes</th>
-        </tr>
-    </thead>
-    <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Dropped") { %>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Country</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <% } %> <% watchlists.forEach(function(watchlist) { %> <% if (watchlist.status === "Dropped" &&
+  watchlist.author.equals(currentUser._id)) { %>
 
-    <tbody>
-        <tr>
-            <td class="index"><%=droppedIndex %></td>
-            <td class="title">
-                <a class="d-flex bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
-            </td>
-            <td class="year"><%= watchlist.year %></td>
-            <td class="genre"><%= watchlist.genre %></td>
-            <td class="country"><%= watchlist.country %></td>
-            <td class="starability-result" data-rating="<%=watchlist.rating%>"></td>
-            <td><%= watchlist.notes %></td>
-        </tr>
-    </tbody>
-    <% droppedIndex++; %> <% } %> <% }) %>
+  <tbody>
+    <tr>
+      <td class="index"><%=droppedIndex %></td>
+      <td class="title">
+        <a class="d-flex bold-link" href="/watchlists/<%=watchlist._id %>"><%= watchlist.title %></a>
+      </td>
+      <td class="year"><%= watchlist.year %></td>
+      <td class="genre"><%= watchlist.genre %></td>
+      <td class="country"><%= watchlist.country %></td>
+      <td class="starability-result" data-rating="<%=watchlist.rating%>"></td>
+      <td><%= watchlist.notes %></td>
+    </tr>
+  </tbody>
+  <% droppedIndex++; %> <% } %> <% }) %>
 </table>
 
 <% } %>
