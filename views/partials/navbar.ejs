@@ -1,38 +1,35 @@
 <link rel="stylesheet" href="/stylesheets/navbar.css" />
 
 <nav class="navbar sticky-top navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/" style="text-transform: none"
-            ><img
-                src="https://media.discordapp.net/attachments/1174732472806809660/1176552975259422810/79b1003e-2336-4c4d-97c8-3748827bf4b4_cropped.jpeg?ex=656f4958&is=655cd458&hm=666563e48e3fcec2991665d58bf9f3b5803ddee6508e347c8f2af939432cc35d&="
-                alt="MyMovieList Logo"
-                height="35.5"
-        /></a>
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/watchlists">Watchlist</a>
-                <a class="nav-link" href="/watchlists/new">New Watchlist</a>
-            </div>
-            <div class="navbar-nav ms-auto">
-                <% if(!currentUser) { %>
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/register">Register</a>
-                <% } else { %>
-                <a class="nav-link" href="/logout">Logout</a>
-                <% } %>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" style="text-transform: none"
+      ><img src="/images/logo_cropped.jpeg" alt="MyMovieList Logo" height="35.5"
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/watchlists">Watchlist</a>
+        <a class="nav-link" href="/watchlists/new">New Watchlist</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <% if(!currentUser) { %>
+        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/register">Register</a>
+        <% } else { %>
+        <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
     </div>
+  </div>
 </nav>
